@@ -1,0 +1,54 @@
+<div class="wrapper">
+  <div>
+    <mat-icon class="icon">account_circle</mat-icon>
+  </div>
+  <form [formGroup]="authForm" class="example-form" (ngSubmit)="onSubmit()">
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        autocomplete="off"
+        matInput
+        formControlName="username"
+        placeholder="Ex. pat@example.com"
+      />
+      <mat-error
+        *ngIf="authForm.hasError('email') && !authForm.hasError('required')"
+      >
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="authForm.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Password</mat-label>
+      <input
+        type="password"
+        autocomplete="off"
+        matInput
+        formControlName="password"
+        placeholder="Ex. pat@example.com"
+      />
+      <mat-error
+        *ngIf="authForm.hasError('password') && !authForm.hasError('required')"
+      >
+        Please enter a valid password
+      </mat-error>
+      <mat-error *ngIf="authForm.hasError('required')">
+        Paswword is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <button
+      class="btn"
+      type="submit"
+      mat-button
+      color="secondary"
+      [disabled]="!authForm.valid"
+    >
+      Sign-in
+    </button>
+  </form>
+</div>

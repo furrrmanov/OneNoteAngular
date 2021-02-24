@@ -1,0 +1,24 @@
+<div
+  class="main-menu close"
+  [ngClass]="{
+    open: openDriver,
+    close: !openDriver
+  }"
+  (mouseover)="openMenu()"
+  (mouseout)="closeMenu()"
+>
+  <ul class="menu-list">
+    <li class="menu-item" routerLinkActive="active">
+      <a [routerLink]="['/notebook']">
+        <mat-icon class="icon">book</mat-icon>
+      </a>
+      <span class="item-name">Notebook</span>
+    </li>
+    <li class="menu-item" routerLinkActive="active">
+      <a [routerLink]="['/catalog']">
+        <mat-icon class="icon">chrome_reader_mode</mat-icon>
+      </a>
+      <span class="item-name">Catalog</span>
+    </li>
+  </ul>
+</div>

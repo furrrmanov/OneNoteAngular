@@ -1,0 +1,38 @@
+.wrapper {
+  width: 180px;
+  height: 100%;
+  margin-top: 10px;
+  border-right: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .container-list {
+    padding: 0px;
+
+    .container-list-item {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      cursor: pointer;
+      width: 180px;
+      height: 40px;
+
+      .title {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        padding: 5px;
+        margin: 0px 10px 0px 10px;
+      }
+    }
+  }
+
+  button {
+    width: 100%;
+    background-color: #6444e4;
+    border-radius: 0px;
+  }
+}

@@ -1,0 +1,30 @@
+<mat-toolbar>
+  <span>OnenNote</span>
+  <div class="container">
+    <div *ngIf="(userName$ | async) !== ''; else user_email">
+      <span class="user-name">{{ userName$ | async }} </span>
+    </div>
+
+    <button
+      mat-mini-fab
+      color="secondary"
+      aria-label="Example icon button with a menu icon"
+      (click)="clickProfile()"
+    >
+      <div *ngIf="(userPhoto$ | async) !== ''; else acount_circle">
+        <img class="user-photo" [src]="userPhoto$ | async" alt="user photo" />
+      </div>
+    </button>
+    <div class="profile-popup" *ngIf="showProfilePopup">
+      <button mat-raised-button (click)="logout()">Sign-out</button>
+    </div>
+  </div>
+</mat-toolbar>
+
+<ng-template #acount_circle>
+  <mat-icon class="profile-img">account_circle</mat-icon>
+</ng-template>
+
+<ng-template #user_email>
+  <span class="user-name">{{ userEmail$ | async }} </span>
+</ng-template>

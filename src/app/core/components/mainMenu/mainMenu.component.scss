@@ -1,0 +1,58 @@
+.main-menu {
+  width: 60px;
+  height: calc(100vh - 80px);
+  margin-top: 10px;
+  border-right: 1px solid #ccc;
+  transition: 0.1s linear;
+
+  .menu-list {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0px;
+    overflow-x: hidden;
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      overflow-x: hidden;
+      cursor: pointer;
+
+      a {
+        display: flex;
+      }
+
+      .item-name {
+        font-size: 1rem;
+        margin-left: 10px;
+      }
+
+      .icon {
+        width: 40px;
+        height: 40px;
+        color: #6444e4;
+        font-size: 40px;
+        margin-left: 10px;
+
+        &:hover {
+          color: rgb(75, 14, 243);
+        }
+      }
+    }
+  }
+}
+
+.open {
+  width: 150px;
+  transition: 0.2s linear;
+}
+
+.closed {
+  width: 60px;
+}
+
+.active {
+  background-color: #ccc;
+}
