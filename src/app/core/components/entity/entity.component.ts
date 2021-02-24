@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-entity',
@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./entity.component.scss']
 })
 export class EntityComponent implements OnInit {
-
+ @Input() entity
   constructor() { }
 
   ngOnInit() {
+    // console.log(this.entity)
   }
 
 }

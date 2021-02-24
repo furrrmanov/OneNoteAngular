@@ -9,10 +9,15 @@ import {
   ROUT_FOR_LOGIN_PAGE,
   ROUT_FOR_CATALOG_PAGE,
 } from '../core/constants';
+import { EntityResolver } from '../shared/resolvers/entity.resolver'
 
 const routes: Routes = [
-  { path: ROUT_FOR_HOME_PAGE, component: NotebookComponent },
-  { path: ROUT_FOR_CATALOG_PAGE, component: CatalogComponent },
+  { path: ROUT_FOR_HOME_PAGE, component: NotebookComponent, resolve: {
+    notebook: EntityResolver
+  } },
+  { path: ROUT_FOR_CATALOG_PAGE, component: CatalogComponent, resolve: {
+    catalog: EntityResolver
+  }},
   { path: ROUT_FOR_LOGIN_PAGE, component: LoginComponent },
   { path: '**', redirectTo: ROUT_FOR_HOME_PAGE },
 ];

@@ -1,12 +1,14 @@
-import { createReducer, on } from "@ngrx/store";
+import { createReducer, on } from '@ngrx/store';
 
-import { setEntity } from "../actions";
+import { setEntity } from '../actions';
+import { Notebook } from '../../../shared/models/notebook.model'
+import { Catalog } from '../../../shared/models/catalog.model'
 
-export const entityNode = "entity";
+export const entityNode = 'entity';
 
 export interface EntityState {
-  notebook: Array<[]>;
-  catalog: Array<[]>;
+  notebook: Notebook[];
+  catalog: Catalog[];
 }
 
 export const initialState: EntityState = {
@@ -16,10 +18,8 @@ export const initialState: EntityState = {
 
 export const entityReducer = createReducer(
   initialState,
-  on(setEntity, (state, { entity }) => {
-    return {
-      ...state,
-      [entity.name]: entity.date
-    }
-  })
+  on(setEntity, (state, { entity }) => ({
+    ...state,
+    [entity.name]: entity.data,
+  }))
 );

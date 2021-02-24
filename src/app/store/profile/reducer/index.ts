@@ -1,14 +1,10 @@
-import { createReducer, on, Action } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 
 import { setProfile } from '../actions';
+import { ProfileState } from '../../../shared/models//profile.model';
 
 export const profileNode = 'profile';
 const storage: ProfileState = JSON.parse(localStorage.getItem('profile'));
-
-export interface ProfileState {
-  owner: string;
-  id?: string;
-}
 
 export const initialState: ProfileState = {
   owner: storage !== null && storage.owner ? storage.owner : '',

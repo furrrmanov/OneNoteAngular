@@ -1,17 +1,11 @@
-import { createReducer, on, Action } from '@ngrx/store';
-import { logOutUser } from './../actions/index';
+import { createReducer, on } from '@ngrx/store';
 
+import { logOutUser } from './../actions/index';
 import { setUser } from '../actions';
+import { UserState } from '../../../shared/models/user.model'
 
 export const usesrNode = 'user';
 const storage: UserState = JSON.parse(localStorage.getItem('user'));
-
-export interface UserState {
-  isLogged: boolean;
-  email: string;
-  name: string;
-  photoUrl: string;
-}
 
 export const initialState: UserState = {
   isLogged: storage !== null && storage.isLogged ? storage.isLogged : false,

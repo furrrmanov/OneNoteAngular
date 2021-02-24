@@ -1,6 +1,4 @@
-import { ProfileState } from './../../store/profile/reducer/index';
 import { Injectable } from '@angular/core';
-import { UserState } from 'src/app/store/user/reducer';
 
 @Injectable({
   providedIn: 'root',
