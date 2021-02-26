@@ -1,5 +1,6 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { UserState, usesrNode } from './../reducer/index';
+import { usesrNode } from './../reducer/index';
+import { UserState } from './../../../shared/models/user.model';
 
 const selectUserFeature = createFeatureSelector<UserState>(usesrNode);
 

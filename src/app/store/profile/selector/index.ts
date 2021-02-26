@@ -1,5 +1,6 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { ProfileState, profileNode } from './../reducer/index';
+import { profileNode } from './../reducer/index';
+import { ProfileState } from './../../../shared/models/profile.model';
 
 const selectUserFeature = createFeatureSelector<ProfileState>(profileNode);
 

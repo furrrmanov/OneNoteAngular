@@ -1,8 +1,10 @@
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 
 import { environment } from '../../environments/environment';
-import { UserState, usesrNode, userReducer } from './user/reducer/index';
-import { profileReducer, ProfileState, profileNode } from './profile/reducer';
+import { usesrNode, userReducer } from './user/reducer/index';
+import { UserState } from './../shared/models/user.model';
+import { ProfileState } from './../shared/models/profile.model';
+import { profileReducer, profileNode } from './profile/reducer';
 import { entityReducer, entityNode, EntityState } from './entity/reducer';
 
 export interface State {

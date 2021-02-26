@@ -1,8 +1,8 @@
 <div class="wrapper">
   <div class="entity-container">
-    <ul class="container-list">
+    <ul class="container-list" *ngFor="let item of data">
       <li class="container-list-item">
-        <span>Test name</span>
+        <span>{{ item.name }}</span>
       </li>
     </ul>
   </div>

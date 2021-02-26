@@ -1,4 +1,4 @@
-import { UserState } from './../../store/user/reducer/index';
+import { UserState } from '../../shared/models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';

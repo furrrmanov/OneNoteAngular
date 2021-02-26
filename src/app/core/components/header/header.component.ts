@@ -13,7 +13,7 @@ import { logOutUser } from './../../../store/user/actions/index';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   public showProfilePopup = false;
   public userEmail$: Observable<string> = this.facade.selectUserEmail();
   public userName$: Observable<string> = this.facade.selectUserName();
@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit {
     private authService: AuthService,
     private facade: FacadeService
   ) {}
-  ngOnInit() {}
 
   public clickProfile(): void {
     if (this.showProfilePopup) {

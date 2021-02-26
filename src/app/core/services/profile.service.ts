@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import { BASE_API_URL } from '../constants'
+import { BASE_API_URL } from '../constants';
 
 export interface Profile {
   owner: string;
@@ -22,14 +23,11 @@ export class ProfileService {
   }
 
   public createUserProfile(email: string) {
-    return this.http.post(
-      `${BASE_API_URL}/userProfiles/create-profile`,
-      {
-        root: '/userProfiles',
-        value: {
-          owner: email,
-        },
-      }
-    );
+    return this.http.post(`${BASE_API_URL}/userProfiles/create-profile`, {
+      root: '/userProfiles',
+      value: {
+        owner: email,
+      },
+    });
   }
 }

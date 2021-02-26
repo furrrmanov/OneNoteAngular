@@ -7,7 +7,7 @@ import { DataMapperService } from './../../services/dataMapper.service';
 import { AuthService } from './../../services/authentication.service';
 import { Profile, ProfileService } from './../../services/profile.service';
 import { setUser } from './../../../store/user/actions/index';
-import { UserState } from 'src/app/store/user/reducer';
+import { UserState } from '../../../shared/models/user.model';
 import { setProfile } from 'src/app/store/profile/actions';
 
 @Component({
@@ -53,6 +53,8 @@ export class LoginComponent implements OnInit {
           const userProfile = this.mapper
             .transformDataList(response)
             .find((item) => item.owner === userInfo.email);
+          console.log(typeof userProfile);
+          console.log('response', response);
 
           this.checkUserProfile(userProfile, userInfo);
         });

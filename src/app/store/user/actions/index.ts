@@ -1,4 +1,4 @@
-import { UserState } from '../reducer';
+import { UserState } from '../../../shared/models/user.model';
 import { createAction, props } from '@ngrx/store';
 
 export const setUser = createAction('[ Login ] Set User', props<{ userInfo: UserState }>());
