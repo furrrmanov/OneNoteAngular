@@ -1,3 +1,4 @@
+import { EntityEffects } from './store/entity/effects/enitiy.effects';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,6 +12,7 @@ import { AppComponent } from './app.component';
 import { reducers, metaReducers } from './store';
 import { environment } from '../environments/environment';
 import { CoreModule } from './core/core.module';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +30,7 @@ import { CoreModule } from './core/core.module';
     }),
     CoreModule,
     BrowserAnimationsModule,
+    EffectsModule.forRoot([EntityEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -3,12 +3,12 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { DataMapperService } from './../../services/dataMapper.service';
 import { AuthService } from './../../services/authentication.service';
 import { Profile, ProfileService } from './../../services/profile.service';
 import { setUser } from './../../../store/user/actions/index';
 import { UserState } from '../../../shared/models/user.model';
 import { setProfile } from 'src/app/store/profile/actions';
+
 
 @Component({
   selector: 'app-login',
@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
     private profileService: ProfileService,
     private store: Store,
     private router: Router,
-    private mapper: DataMapperService
   ) {}
 
   ngOnInit() {}
@@ -50,12 +49,9 @@ export class LoginComponent implements OnInit {
         this.store.dispatch(setUser({ userInfo: userInfo }));
 
         this.profileService.checkUserProfile().subscribe((response) => {
-          const userProfile = this.mapper
-            .transformDataList(response)
-            .find((item) => item.owner === userInfo.email);
-          console.log(typeof userProfile);
-          console.log('response', response);
-
+          const userProfile = Object.values(response).find(
+            (item) => item.owner === userInfo.email
+          );
           this.checkUserProfile(userProfile, userInfo);
         });
 

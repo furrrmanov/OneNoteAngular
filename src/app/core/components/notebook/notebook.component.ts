@@ -1,10 +1,9 @@
+import { selectNotebook } from './../../../store/entity/selector/index';
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 
-import { EntityService } from './../../services/entity.service';
-import { setEntity } from './../../../store/entity/actions/index';
-import { ActivatedRoute } from '@angular/router';
-import { Notebook } from './../../../shared/models/notebook.model';
+import { loadEntity } from './../../../store/entity/actions/index';
+import { ROUT_FOR_HOME_PAGE } from '../../constants/index'
 
 @Component({
   selector: 'app-notebook',
@@ -12,24 +11,10 @@ import { Notebook } from './../../../shared/models/notebook.model';
   styleUrls: ['./notebook.component.scss'],
 })
 export class NotebookComponent implements OnInit {
-  public entity: any;
-  constructor(
-    private entityService: EntityService,
-    private store$: Store,
-    private route: ActivatedRoute
-  ) {}
+  public entity$: any = this.store$.pipe(select(selectNotebook));
+  constructor(private store$: Store) {}
 
   public ngOnInit(): void {
-    this.route.data.subscribe((data) => {
-      this.entity = data;
-      this.store$.dispatch(
-        setEntity({
-          entity: {
-            name: 'notebook',
-            data: data,
-          },
-        })
-      );
-    });
+    this.store$.dispatch(loadEntity({ path: ROUT_FOR_HOME_PAGE }));
   }
 }

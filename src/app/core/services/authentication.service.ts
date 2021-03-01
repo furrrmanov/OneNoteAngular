@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { BASE_API_URL } from '../constants';
+import { BASE_API_URL, SIGN_IN_URL, SIGN_OUT_URL } from '../constants';
 
 export interface Auth {
   email: string;
@@ -17,10 +17,10 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   public login(value: Auth): Observable<UserState> {
-    return this.http.put<UserState>(`${BASE_API_URL}/auth/sign-in`, value);
+    return this.http.put<UserState>(`${BASE_API_URL}${SIGN_IN_URL}`, value);
   }
 
   public logOut(): Observable<void> {
-    return this.http.delete<void>(`${BASE_API_URL}/auth/sign-out`);
+    return this.http.delete<void>(`${BASE_API_URL}${SIGN_OUT_URL}`);
   }
 }

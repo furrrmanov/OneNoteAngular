@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 
-import { EntityService } from './../../services/entity.service';
-import { setEntity } from './../../../store/entity/actions/index';
-import { Route } from '@angular/compiler/src/core';
-import { ActivatedRoute } from '@angular/router';
+import { loadEntity } from './../../../store/entity/actions/index';
+import { selectCatalog } from 'src/app/store/entity/selector';
+import { ROUT_FOR_CATALOG_PAGE } from '../../constants/index';
 
 @Component({
   selector: 'app-catalog',
@@ -12,20 +11,10 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./catalog.component.scss'],
 })
 export class CatalogComponent implements OnInit {
-  public entity: any;
-  constructor(private store$: Store, private route: ActivatedRoute) {}
+  public entity$: any = this.store$.pipe(select(selectCatalog));
+  constructor(private store$: Store) {}
 
-  ngOnInit() {
-    this.route.data.subscribe((data) => {
-      this.entity = data;
-      this.store$.dispatch(
-        setEntity({
-          entity: {
-            name: 'catalog',
-            data: data,
-          },
-        })
-      );
-    });
+  public ngOnInit(): void {
+    this.store$.dispatch(loadEntity({ path: ROUT_FOR_CATALOG_PAGE }));
   }
 }
