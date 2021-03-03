@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { map, mergeMap } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { loadEntity, setEntity } from './../actions/index';
-import { Store } from '@ngrx/store';
 
 @Injectable()
 export class EntityEffects {
@@ -32,6 +31,5 @@ export class EntityEffects {
   constructor(
     private actions$: Actions,
     private entityService: EntityService,
-    private store$: Store
   ) {}
 }

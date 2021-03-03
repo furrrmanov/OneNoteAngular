@@ -15,3 +15,13 @@ export const selectNotebook = createSelector(
   selectUserFeature,
   (state: EntityState): Notebook[] => state.notebook
 );
+
+export const selectSubEntity = (name: string, subName: string, id: string) =>
+  createSelector(selectUserFeature, (state: EntityState): any => {
+    const filteredList = state[name].find(
+      (item) => item.id === id && item[`${subName}List`]
+    );
+    return filteredList && filteredList[`${subName}List`]
+      ? filteredList[`${subName}List`]
+      : [];
+  });

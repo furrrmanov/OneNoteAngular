@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private profileService: ProfileService,
-    private store: Store,
+    private store$: Store,
     private router: Router,
   ) {}
 
@@ -32,11 +32,11 @@ export class LoginComponent implements OnInit {
 
   public checkUserProfile(userProfile: Profile, userInfo: UserState) {
     if (userProfile) {
-      this.store.dispatch(setProfile({ userProfile: userProfile }));
+      this.store$.dispatch(setProfile({ userProfile: userProfile }));
       localStorage.setItem('profile', JSON.stringify(userProfile));
     } else {
       this.profileService.createUserProfile(userInfo.email).subscribe();
-      this.store.dispatch(
+      this.store$.dispatch(
         setProfile({ userProfile: { owner: userInfo.email } })
       );
     }
@@ -46,8 +46,7 @@ export class LoginComponent implements OnInit {
     this.authService
       .login(this.authForm.value)
       .subscribe((userInfo: UserState) => {
-        this.store.dispatch(setUser({ userInfo: userInfo }));
-
+        this.store$.dispatch(setUser({ userInfo: userInfo }));
         this.profileService.checkUserProfile().subscribe((response) => {
           const userProfile = Object.values(response).find(
             (item) => item.owner === userInfo.email

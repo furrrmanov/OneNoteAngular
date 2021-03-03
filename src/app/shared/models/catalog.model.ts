@@ -2,6 +2,7 @@ export interface Catalog {
   name: string;
   owner: string;
   id?: string;
+  entity: string;
   articleList?: ArticleList[];
 }
 

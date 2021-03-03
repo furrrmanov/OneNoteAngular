@@ -1,3 +1,5 @@
+import { DeleteEntityEffects } from './store/entity/effects/delete-entity.effects';
+import { CreateEntityEffects } from './store/entity/effects/create-entity.effects';
 import { EntityEffects } from './store/entity/effects/enitiy.effects';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -30,7 +32,11 @@ import { EffectsModule } from '@ngrx/effects';
     }),
     CoreModule,
     BrowserAnimationsModule,
-    EffectsModule.forRoot([EntityEffects]),
+    EffectsModule.forRoot([
+      EntityEffects,
+      CreateEntityEffects,
+      DeleteEntityEffects,
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -7,8 +7,13 @@
   flex-direction: column;
   justify-content: space-between;
 
+  .entity-container {
+    overflow-y: auto;
+  }
+
   .container-list {
     padding: 0px;
+    margin: 4px 0px 0px 0px;
 
     .container-list-item {
       display: flex;
@@ -19,6 +24,7 @@
       cursor: pointer;
       width: 180px;
       height: 40px;
+      overflow: hidden;
 
       .title {
         white-space: nowrap;
@@ -26,6 +32,10 @@
         overflow: hidden;
         padding: 5px;
         margin: 0px 10px 0px 10px;
+      }
+
+      &:hover {
+        background-color: #ccc;
       }
     }
   }
@@ -35,4 +45,10 @@
     background-color: #6444e4;
     border-radius: 0px;
   }
+}
+
+
+
+.active {
+  background-color: #ccc;
 }

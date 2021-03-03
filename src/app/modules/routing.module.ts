@@ -9,7 +9,6 @@ import {
   ROUT_FOR_LOGIN_PAGE,
   ROUT_FOR_CATALOG_PAGE,
 } from '../core/constants';
-import { EntityResolver } from '../shared/resolvers/entity.resolver';
 
 const routes: Routes = [
   { path: ROUT_FOR_HOME_PAGE, component: NotebookComponent },

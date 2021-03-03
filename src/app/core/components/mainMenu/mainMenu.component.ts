@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router'
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { selectUserAuth } from 'src/app/store/user/selector';
@@ -15,11 +14,7 @@ export class MainMenuComponent implements OnInit {
     select(selectUserAuth)
   );
 
-  constructor(
-    private store$: Store,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+  constructor(private store$: Store) {}
 
   ngOnInit() {}
 
@@ -28,6 +23,6 @@ export class MainMenuComponent implements OnInit {
   }
 
   closeMenu() {
-    this.openDriver = false
+    this.openDriver = false;
   }
 }

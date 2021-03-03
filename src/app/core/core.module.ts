@@ -1,3 +1,5 @@
+import { CustomMenuComponent } from './../shared/components/custom-menu/custom-menu.component';
+import { PopupCreateComponent } from './../shared/components/popup-create/popup-create.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,7 +23,9 @@ import { SubEntityComponent } from './components/subEntity/subEntity.component';
     MainMenuComponent,
     CatalogComponent,
     EntityComponent,
-    SubEntityComponent
+    SubEntityComponent,
+    PopupCreateComponent,
+    CustomMenuComponent
   ],
   exports: [
     HeaderComponent,
@@ -30,7 +34,9 @@ import { SubEntityComponent } from './components/subEntity/subEntity.component';
     MainMenuComponent,
     CatalogComponent,
     EntityComponent,
-    SubEntityComponent
-  ],
+    SubEntityComponent,
+    PopupCreateComponent,
+    CustomMenuComponent
+  ]
 })
 export class CoreModule {}

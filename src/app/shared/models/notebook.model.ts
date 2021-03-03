@@ -2,6 +2,7 @@ export interface Notebook {
   name: string;
   owner: string;
   id?: string;
+  entity: string;
   noteList?: NoteList[];
 }
 

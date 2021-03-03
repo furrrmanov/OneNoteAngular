@@ -1,0 +1,14 @@
+<div
+  style="visibility: hidden; position: fixed"
+  [style.left]="contextMenuPosition.x"
+  [style.top]="contextMenuPosition.y"
+  [matMenuTriggerFor]="contextMenu"
+  (menuClosed)="closedMenu()"
+></div>
+<mat-menu #contextMenu="matMenu">
+  <ng-template matMenuContent let-item="item">
+    <button class="btn" mat-menu-item (click)="deleteItem(item)">
+      Delete
+    </button>
+  </ng-template>
+</mat-menu>

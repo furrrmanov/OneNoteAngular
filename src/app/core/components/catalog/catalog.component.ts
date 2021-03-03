@@ -12,6 +12,8 @@ import { ROUT_FOR_CATALOG_PAGE } from '../../constants/index';
 })
 export class CatalogComponent implements OnInit {
   public entity$: any = this.store$.pipe(select(selectCatalog));
+  public entityName: string =  ROUT_FOR_CATALOG_PAGE
+  public subEntityName = 'article'
   constructor(private store$: Store) {}
 
   public ngOnInit(): void {

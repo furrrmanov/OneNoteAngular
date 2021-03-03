@@ -1,30 +1,30 @@
 <div class="wrapper">
   <div class="entity-container">
     <ul class="container-list">
-      <li class="container-list-item">
-        <span>Test name</span>
+      <li
+        class="container-list-item"
+        *ngFor="let item of subEntityList"
+        [ngClass]="{ active: getActiveLink(item.id) }"
+        (click)="selectSubEntity(item.id)"
+        (contextmenu)="onContextMenu($event, item)"
+      >
+        <span title="{{ item.name }}" class="title">{{ item.name }}</span>
       </li>
-
-      <li class="container-list-item">
-        <span class="title">Test name ddddddddddddddddddddddddddd</span>
-      </li>
-
-      <li class="container-list-item">
-        <span class="title">Test name</span>
-      </li>
-
-      <li class="container-list-item">
-        <span class="title">Test name</span>
-      </li>
-
-      <li class="container-list-item">
-        <span class="title">Test name</span>
-      </li>
-
     </ul>
   </div>
   <div class="button-container">
-    <button mat-button>Add Note</button>
+    <button
+    mat-button
+    (click)="handleAddSubEntity()"
+    [disabled]="!activeEntityId"
+    >Add {{ subEntityName | titlecase }}</button>
   </div>
 </div>
 
+<app-custom-menu
+  [isOpen]="contextMenuIsOpen"
+  [contextMenuPosition]="contextMenuPosition"
+  (onTrigger)="onTriggerContextMenu($event)"
+  (onClosed)="onClosedContextMenu()"
+  [handleDeleteItem]="handleDeleteItem"
+></app-custom-menu>
