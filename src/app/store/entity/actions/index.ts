@@ -19,3 +19,18 @@ export const DeleteEntityAction = createAction(
   '[ Entity ] Delete Entity',
   props<{ data: any }>()
 );
+
+export const CreateSubEntityAction = createAction(
+  '[ SubEntity ] Create SubEntity',
+  props<{ data: any }>()
+);
+
+export const DeleteSubEntityAction = createAction(
+  '[ SubEntity ] Delete SubEntity',
+  props<{ data: any }>()
+);
+
+export const UpdateSubEntityAction = createAction(
+  '[ SubEntity ] Update Subentity',
+  props<{ data: any }>()
+)

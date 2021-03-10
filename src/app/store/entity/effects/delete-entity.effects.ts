@@ -12,7 +12,7 @@ export class DeleteEntityEffects {
       mergeMap((action) => {
         return this.entityService.deleteEntity(action.data).pipe(
           map((res) => {
-            return loadEntity({ path: action.data.collectionName.slice(1) });
+            return loadEntity({ path: action.data.entity });
           })
         );
         return [];

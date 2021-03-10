@@ -25,13 +25,30 @@ export class EntityService {
     );
   }
 
-  public createEntity(value: any) {
-    return this.http.post(`${BASE_API_URL}${value.root}${value.path}`, value);
+  public createEntity({ value }) {
+    const path = `/${value.entity}/create-${value.entity}`;
+    const data = {
+      value: {
+        name: value.name,
+        owner: value.owner,
+        entity: value.entity,
+      },
+      root: `/${value.entity}`,
+    };
+
+    return this.http.post(`${BASE_API_URL}${path}`, data);
   }
 
   public deleteEntity(value: any) {
-    return this.http.request('delete', `${BASE_API_URL}${value.path}`, {
-      body: { value },
+    const path = `/${value.entity}/delete-${value.entity}`;
+    const data = {
+      collectionName: `/${value.entity}`,
+      collectionRoot: `/${value.entity}/`,
+      id: value.id,
+    };
+
+    return this.http.request('delete', `${BASE_API_URL}${path}`, {
+      body: { value: data },
     });
   }
 }

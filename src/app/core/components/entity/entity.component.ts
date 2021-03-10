@@ -1,5 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupCreateComponent } from 'src/app/shared/components/popup-create/popup-create.component';
 import { MatMenuTrigger } from '@angular/material/menu';
@@ -20,18 +19,13 @@ export class EntityComponent implements OnInit {
   }
   @Input() public entityName: string;
   public data: any;
-  public currentId: string;
   public contextMenu: MatMenuTrigger;
   public currentContextItem: any;
   public contextMenuIsOpen: boolean = false;
   public contextMenuPosition = { x: '0px', y: '0px' };
-  public callbackForCreate: Function;
+  public callbackForCreate: (name: string, email: string) => void;
 
-  constructor(
-    private router: Router,
-    public dialog: MatDialog,
-    private store$: Store
-  ) {}
+  constructor(public dialog: MatDialog, private store$: Store) {}
 
   ngOnInit() {
     this.callbackForCreate = this.createItem.bind(this);
@@ -56,19 +50,11 @@ export class EntityComponent implements OnInit {
     this.contextMenuIsOpen = false;
   }
 
-  public getActiveLink(id: string): boolean {
-    return id === this.currentId;
+  public getPath(entityName: string): string {
+    return `/${entityName}`;
   }
 
-  public selectEntity(id: string): void {
-    this.currentId = id;
-    this.router.navigate([], {
-      queryParams: {
-        id: id,
-      },
-      queryParamsHandling: 'merge',
-    });
-  }
+
 
   public handleAddEntity(): void {
     this.dialog.open(PopupCreateComponent, {
@@ -86,8 +72,6 @@ export class EntityComponent implements OnInit {
             owner: email,
             entity: this.entityName,
           },
-          root: `/${this.entityName}`,
-          path: `/create-${this.entityName}`,
         },
       })
     );
@@ -97,9 +81,7 @@ export class EntityComponent implements OnInit {
     this.store$.dispatch(
       DeleteEntityAction({
         data: {
-          collectionName: `/${item.entity}`,
-          collectionRoot: `/${item.entity}/`,
-          path: `/${item.entity}/delete-${item.entity}`,
+          entity: item.entity,
           id: item.id,
         },
       })

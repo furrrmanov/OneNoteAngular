@@ -1,10 +1,8 @@
 <div class="wrapper">
-  <app-entity
-  [entity]="entity$ | async"
-  [entityName]="entityName"
-  ></app-entity>
+  <app-entity [entity]="entity$ | async" [entityName]="entityName"></app-entity>
   <app-subEntity
-  [entityName]="entityName"
-  [subEntityName]="subEntityName"
+    [entityName]="entityName"
+    [subEntityName]="subEntityName"
   ></app-subEntity>
+  <div class="container"><router-outlet></router-outlet></div>
 </div>

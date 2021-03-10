@@ -4,8 +4,8 @@
       <li
         class="container-list-item"
         *ngFor="let item of subEntityList"
-        [ngClass]="{ active: getActiveLink(item.id) }"
-        (click)="selectSubEntity(item.id)"
+        [routerLink]="getPath(item.id)"
+        routerLinkActive="active"
         (contextmenu)="onContextMenu($event, item)"
       >
         <span title="{{ item.name }}" class="title">{{ item.name }}</span>

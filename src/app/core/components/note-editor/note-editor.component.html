@@ -1,0 +1,29 @@
+<div class="wrapper">
+  <quill-editor
+    [(ngModel)]="editorText"
+    (ngModelChange)="changeEditor($event)"
+    #description
+  >
+  </quill-editor>
+  <div class="note-info">
+    <form [formGroup]="form" (ngSubmit)="handleSave()">
+      <mat-form-field class="input-name">
+        <mat-label>Enter a note name:</mat-label>
+        <input matInput autocomplete="off" formControlName="noteName" />
+        <mat-hint class="date" align="start"
+          ><strong>{{ currentNote?.date | date: "MMMM d, y, H:mm" }}</strong>
+        </mat-hint>
+      </mat-form-field>
+      <button
+        type="submit"
+        mat-button
+        class="btn-save"
+        mat-raised-button
+        color="primary"
+        [disabled]="!form.valid || isChanged"
+      >
+        Save
+      </button>
+    </form>
+  </div>
+</div>

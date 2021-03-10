@@ -3,9 +3,9 @@
     <ul class="container-list">
       <li
         *ngFor="let item of data"
-        [ngClass]="{ active: getActiveLink(item.id) }"
+        [routerLink]="[getPath(item.entity), item.id]"
+        routerLinkActive="active"
         class="container-list-item"
-        (click)="selectEntity(item.id)"
         (contextmenu)="onContextMenu($event, item)"
       >
         <span title="{{ item.name }}" class="title">{{ item.name }}</span>

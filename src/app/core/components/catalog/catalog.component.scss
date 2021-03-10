@@ -1,4 +1,19 @@
+:host {
+  width: 100%;
+}
+
 .wrapper {
   height: calc(100vh - 80px);
   display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  .container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: auto;
+  }
 }
+

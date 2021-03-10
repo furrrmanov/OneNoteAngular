@@ -1,17 +1,14 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+  CreateSubEntityAction,
+  DeleteSubEntityAction,
+} from './../../../store/entity/actions/index';
+import { Component, Input, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs/operators';
 import { selectSubEntity } from 'src/app/store/entity/selector';
-import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { PopupCreateComponent } from 'src/app/shared/components/popup-create/popup-create.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-subEntity',
@@ -23,23 +20,18 @@ export class SubEntityComponent implements OnInit {
   @Input() public subEntityName: string;
   public activeEntityId: string;
   public subEntityList: any;
-  public currentId: string;
   public contextMenu: MatMenuTrigger;
   public currentContextItem: any;
   public contextMenuIsOpen: boolean = false;
   public contextMenuPosition = { x: '0px', y: '0px' };
-  public callbackForCreate: Function;
+  public handleDeleteItem: () => void;
+  private isKilled: Subject<boolean> = new Subject<boolean>();
 
-  constructor(
-    private store$: Store,
-    private route: ActivatedRoute,
-    public dialog: MatDialog,
-    private router: Router
-  ) {}
+  constructor(private store$: Store, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.route.queryParams.subscribe((params) => {
-      this.activeEntityId = params['id'];
+    this.route.params.pipe(takeUntil(this.isKilled)).subscribe((params) => {
+      this.activeEntityId = params.id;
       this.store$
         .pipe(
           select(
@@ -52,21 +44,18 @@ export class SubEntityComponent implements OnInit {
         )
         .subscribe((data) => (this.subEntityList = data));
     });
-    this.callbackForCreate = this.createItem.bind(this)
+    this.handleDeleteItem = this.deleteItem.bind(this);
   }
 
-  public getActiveLink(id: string): boolean {
-    return id === this.currentId;
+  ngOnDestroy() {
+    this.isKilled.next(true);
+    this.isKilled.complete();
   }
 
-  public selectSubEntity(id: string): void {
-    this.currentId = id;
-    this.router.navigate([], {
-      queryParams: {
-        subId: id,
-      },
-      queryParamsHandling: 'merge',
-    });
+  public getPath(id: string): string[] {
+    return [
+      `/${this.entityName}/${this.activeEntityId}/${this.subEntityName}/${id}`,
+    ];
   }
 
   public onContextMenu(event: MouseEvent, item: any) {
@@ -89,17 +78,33 @@ export class SubEntityComponent implements OnInit {
   }
 
   public handleAddSubEntity(): void {
-    this.dialog.open(PopupCreateComponent, {
-      width: '300px',
-      data: { name: this.subEntityName, callback: this.callbackForCreate },
-    });
+    this.store$.dispatch(
+      CreateSubEntityAction({
+        data: {
+          value: {
+            entity: this.entityName,
+            id: this.activeEntityId,
+            collectionName: this.subEntityName,
+            subEntityList: this.subEntityList,
+          },
+        },
+      })
+    );
   }
 
-  public createItem(name: string, email: string): void {
-    console.log('create subEntity logic');
-  }
-
-  public handleDeleteItem(): void {
-    console.log('delete SubEntity logic');
+  public deleteItem(item): void {
+    this.store$.dispatch(
+      DeleteSubEntityAction({
+        data: {
+          value: {
+            item,
+            entity: this.entityName,
+            id: this.activeEntityId,
+            collectionName: this.subEntityName,
+            subEntityList: this.subEntityList,
+          },
+        },
+      })
+    );
   }
 }

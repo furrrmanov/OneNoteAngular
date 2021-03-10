@@ -10,8 +10,8 @@ import { Catalog } from '../../shared/models/catalog.model';
 import { Notebook } from '../../shared/models/notebook.model';
 
 import {
-  ROUT_FOR_HOME_PAGE,
-  ROUT_FOR_CATALOG_PAGE,
+  HOME_PAGE_PATH,
+  CATALOG_PAGE_PATH,
 } from '../../core/constants';
 
 @Injectable({ providedIn: 'root' })
@@ -26,10 +26,10 @@ export class EntityResolver implements Resolve<any> {
       root: '/catalog',
     });
 
-    if (route.routeConfig.path === ROUT_FOR_CATALOG_PAGE) {
+    if (route.routeConfig.path === CATALOG_PAGE_PATH) {
       return catalog;
     }
-    if (route.routeConfig.path === ROUT_FOR_HOME_PAGE) {
+    if (route.routeConfig.path === HOME_PAGE_PATH) {
       return notebook;
     }
   }

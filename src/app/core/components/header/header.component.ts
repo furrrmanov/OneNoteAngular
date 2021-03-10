@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { ROUT_FOR_LOGIN_PAGE } from '../../constants/index';
+import { LOGIN_PAGE_PATH } from '../../constants/index';
 import { logOutUser } from './../../../store/user/actions/index';
 
 @Component({
@@ -38,7 +38,7 @@ export class HeaderComponent {
     localStorage.removeItem('user');
     localStorage.removeItem('profile');
     this.authService.logOut().subscribe();
-    this.router.navigate([`/${ROUT_FOR_LOGIN_PAGE}`]);
+    this.router.navigate([`/${LOGIN_PAGE_PATH}`]);
     this.store$.dispatch(logOutUser());
     this.showProfilePopup = false;
   }

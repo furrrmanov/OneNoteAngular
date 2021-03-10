@@ -1,17 +1,17 @@
+import { SubEntityService } from './../../../core/services/sub-entity.service';
 import { EntityService } from './../../../core/services/entity.service';
 import { Injectable } from '@angular/core';
 import { map, mergeMap } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { CreateEntityAction, loadEntity } from '../actions/index';
-
+import { loadEntity, DeleteSubEntityAction } from '../actions/index';
 
 @Injectable()
-export class CreateEntityEffects {
-  createEntity$ = createEffect(() => {
+export class DeleteSubEnityEffects {
+  deleteSubEntity$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(CreateEntityAction),
+      ofType(DeleteSubEntityAction),
       mergeMap((action) => {
-        return this.entityService.createEntity(action.data).pipe(
+        return this.subEntityService.deleteSubEntity(action.data).pipe(
           map((res) => {
             return loadEntity({ path: action.data.value.entity });
           })
@@ -22,6 +22,6 @@ export class CreateEntityEffects {
 
   constructor(
     private actions$: Actions,
-    private entityService: EntityService
+    private subEntityService: SubEntityService
   ) {}
 }

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 
 import { loadEntity } from './../../../store/entity/actions/index';
 import { selectCatalog } from 'src/app/store/entity/selector';
-import { ROUT_FOR_CATALOG_PAGE } from '../../constants/index';
+import { CATALOG_PAGE_PATH } from '../../constants/index';
 
 @Component({
   selector: 'app-catalog',
@@ -12,11 +12,11 @@ import { ROUT_FOR_CATALOG_PAGE } from '../../constants/index';
 })
 export class CatalogComponent implements OnInit {
   public entity$: any = this.store$.pipe(select(selectCatalog));
-  public entityName: string =  ROUT_FOR_CATALOG_PAGE
+  public entityName: string =  CATALOG_PAGE_PATH
   public subEntityName = 'article'
   constructor(private store$: Store) {}
 
   public ngOnInit(): void {
-    this.store$.dispatch(loadEntity({ path: ROUT_FOR_CATALOG_PAGE }));
+    this.store$.dispatch(loadEntity({ path: CATALOG_PAGE_PATH }));
   }
 }

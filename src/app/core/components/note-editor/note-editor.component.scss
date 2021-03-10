@@ -1,0 +1,31 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100vh - 70px);
+
+  .note-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 180px;
+
+    .date {
+      text-align: center;
+      font-size: 12px;
+    }
+  }
+
+  .btn-save {
+    position: absolute;
+    bottom: 20px;
+    right: 50px;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

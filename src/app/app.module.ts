@@ -1,3 +1,6 @@
+import { UpdateSubEnityEffects } from './store/entity/effects/update-subentity.effects';
+import { DeleteSubEnityEffects } from './store/entity/effects/delete-subentity.effects';
+import { CreateSubEnityEffects } from './store/entity/effects/create-subentity.effects';
 import { DeleteEntityEffects } from './store/entity/effects/delete-entity.effects';
 import { CreateEntityEffects } from './store/entity/effects/create-entity.effects';
 import { EntityEffects } from './store/entity/effects/enitiy.effects';
@@ -36,6 +39,9 @@ import { EffectsModule } from '@ngrx/effects';
       EntityEffects,
       CreateEntityEffects,
       DeleteEntityEffects,
+      CreateSubEnityEffects,
+      DeleteSubEnityEffects,
+      UpdateSubEnityEffects
     ]),
   ],
   providers: [],

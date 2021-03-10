@@ -25,6 +25,7 @@
       width: 180px;
       height: 40px;
       overflow: hidden;
+      outline: none;
 
       .title {
         white-space: nowrap;
@@ -35,6 +36,7 @@
       }
 
       &:hover {
+        transition: .2s linear;
         background-color: #ccc;
       }
     }
@@ -44,6 +46,10 @@
     width: 100%;
     background-color: #6444e4;
     border-radius: 0px;
+
+    &:hover {
+      opacity: .8;
+    }
   }
 }
 
