@@ -16,6 +16,7 @@ import { AppRoutingModule } from '../modules/routing.module';
 import { EntityComponent } from './components/entity/entity.component';
 import { SubEntityComponent } from './components/subEntity/subEntity.component';
 import { QuillModule } from 'ngx-quill';
+import { IvyCarouselModule } from 'angular-responsive-carousel'
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { QuillModule } from 'ngx-quill';
     MaterialModule,
     AppRoutingModule,
     QuillModule.forRoot(),
+    IvyCarouselModule
   ],
   declarations: [
     HeaderComponent,

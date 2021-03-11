@@ -8,21 +8,19 @@ import { selectUserAuth } from 'src/app/store/user/selector';
   templateUrl: './mainMenu.component.html',
   styleUrls: ['./mainMenu.component.scss'],
 })
-export class MainMenuComponent implements OnInit {
-  openDriver = false;
+export class MainMenuComponent {
+  public openDriver: boolean = false;
   public userIsAuth$: Observable<boolean> = this.store$.pipe(
     select(selectUserAuth)
   );
 
   constructor(private store$: Store) {}
 
-  ngOnInit() {}
-
-  openMenu() {
+  public openMenu() {
     this.openDriver = true;
   }
 
-  closeMenu() {
+  public closeMenu() {
     this.openDriver = false;
   }
 }

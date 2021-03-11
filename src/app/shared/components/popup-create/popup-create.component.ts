@@ -8,7 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   templateUrl: './popup-create.component.html',
   styleUrls: ['./popup-create.component.scss'],
 })
-export class PopupCreateComponent implements OnInit {
+export class PopupCreateComponent {
   name: string;
   userEmail: string;
 
@@ -19,12 +19,10 @@ export class PopupCreateComponent implements OnInit {
   ) {
     this.facade
       .selectUserEmail()
-      .subscribe((value) => (this.userEmail = value));
+      .subscribe((value: string) => (this.userEmail = value));
   }
 
-  public confirmCreate() {
+  public confirmCreate(): void {
     this.data.callback(this.name, this.userEmail);
   }
-
-  public ngOnInit() {}
 }

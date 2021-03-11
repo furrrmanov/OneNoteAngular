@@ -14,7 +14,7 @@ import { logOutUser } from './../../../store/user/actions/index';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  public showProfilePopup = false;
+  public showProfilePopup: boolean = false;
   public userEmail$: Observable<string> = this.facade.selectUserEmail();
   public userName$: Observable<string> = this.facade.selectUserName();
   public userPhoto$: Observable<string> = this.facade.selectUserPhoto();

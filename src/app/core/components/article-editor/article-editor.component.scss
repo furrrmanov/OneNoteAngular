@@ -6,6 +6,7 @@
   text-align: center;
   width: 100%;
   margin: 10px auto;
+  transition: 2s linear;
 }
 
 .form {
@@ -15,6 +16,134 @@
   margin: 5px auto;
 }
 
+.swipper-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel {
+  display: flex;
+  height: 80px !important;
+  width: 500px !important;
+
+  .carousel-cell {
+    width: 80px !important;
+    height: 80px !important;
+
+    .delete-image-icon {
+     color: #f44336;
+     position: absolute;
+     right: -3px;
+     z-index: 99999;
+     cursor: pointer;
+    }
+  }
+}
+
 mat-form-field {
   width: 500px;
+}
+
+.uploaod-filed {
+  width: 300px !important;
+}
+
+.mat-toolbar-single-row {
+  height: auto !important;
+  background: transparent;
+}
+
+.mat-toolbar-single-row button {
+  width: 200px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+#uploadFile {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 9;
+  opacity: 0;
+  height: 100%;
+  cursor: pointer;
+  position: absolute;
+}
+
+.upload-container {
+  height: 50px;
+}
+
+.title {
+  font-size: 1.1rem;
+}
+
+.description-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
+
+  .textarea {
+    width: 500px;
+    height: 50px;
+    border: 1px solid #ccc;
+    resize: none;
+    outline: none;
+  }
+}
+
+.characteristic-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+
+  .form-control {
+    outline: none;
+    height: 22px;
+  }
+
+  .form-control.primary {
+    width: 250px;
+    margin-right: 10px;
+  }
+
+  .form-control.secondary {
+    width: 150px;
+  }
+
+  .delete-button {
+    width: 30px;
+    height: 30px;
+  }
+
+  mat-icon {
+    width: 31px;
+    height: 30px;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+
+    .add-button {
+      width: 45px;
+      height: 45px;
+    }
+
+    .btn-save {
+      height: 40px;
+      margin-left: 20px;
+    }
+  }
 }

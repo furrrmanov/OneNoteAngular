@@ -1,4 +1,6 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { Notebook } from './../../../shared/models/notebook.model';
+import { Catalog } from './../../../shared/models/catalog.model';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupCreateComponent } from 'src/app/shared/components/popup-create/popup-create.component';
 import { MatMenuTrigger } from '@angular/material/menu';
@@ -14,13 +16,13 @@ import {
   styleUrls: ['./entity.component.scss'],
 })
 export class EntityComponent implements OnInit {
-  @Input('entity') public set setEntity(entity: any) {
+  @Input('entity') public set setEntity(entity: Notebook | Catalog) {
     this.data = entity;
   }
   @Input() public entityName: string;
-  public data: any;
+  public data: Catalog | Notebook;
   public contextMenu: MatMenuTrigger;
-  public currentContextItem: any;
+  public currentContextItem: Catalog | Notebook;
   public contextMenuIsOpen: boolean = false;
   public contextMenuPosition = { x: '0px', y: '0px' };
   public callbackForCreate: (name: string, email: string) => void;
@@ -31,7 +33,7 @@ export class EntityComponent implements OnInit {
     this.callbackForCreate = this.createItem.bind(this);
   }
 
-  public onContextMenu(event: MouseEvent, item: any) {
+  public onContextMenu(event: MouseEvent, item: Catalog | Notebook): void {
     event.preventDefault();
     this.contextMenuIsOpen = true;
     this.currentContextItem = item;
@@ -54,8 +56,6 @@ export class EntityComponent implements OnInit {
     return `/${entityName}`;
   }
 
-
-
   public handleAddEntity(): void {
     this.dialog.open(PopupCreateComponent, {
       width: '300px',
@@ -64,20 +64,19 @@ export class EntityComponent implements OnInit {
   }
 
   public createItem(name: string, email: string): void {
-    this.store$.dispatch(
-      CreateEntityAction({
-        data: {
-          value: {
-            name: name,
-            owner: email,
-            entity: this.entityName,
-          },
+    const newItem = {
+      data: {
+        value: {
+          name: name,
+          owner: email,
+          entity: this.entityName,
         },
-      })
-    );
+      },
+    };
+    this.store$.dispatch(CreateEntityAction(newItem));
   }
 
-  public handleDeleteItem(item): void {
+  public handleDeleteItem(item: Catalog | Notebook): void {
     this.store$.dispatch(
       DeleteEntityAction({
         data: {

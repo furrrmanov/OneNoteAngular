@@ -9,13 +9,12 @@ import { setUser } from './../../../store/user/actions/index';
 import { UserState } from '../../../shared/models/user.model';
 import { setProfile } from 'src/app/store/profile/actions';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   authForm = new FormGroup({
     password: new FormControl('', [Validators.required]),
     username: new FormControl('', [Validators.required, Validators.email]),
@@ -25,12 +24,10 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private profileService: ProfileService,
     private store$: Store,
-    private router: Router,
+    private router: Router
   ) {}
 
-  ngOnInit() {}
-
-  public checkUserProfile(userProfile: Profile, userInfo: UserState) {
+  public checkUserProfile(userProfile: Profile, userInfo: UserState): void {
     if (userProfile) {
       this.store$.dispatch(setProfile({ userProfile: userProfile }));
       localStorage.setItem('profile', JSON.stringify(userProfile));
@@ -42,14 +39,14 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  public onSubmit() {
+  public onSubmit(): void {
     this.authService
       .login(this.authForm.value)
       .subscribe((userInfo: UserState) => {
         this.store$.dispatch(setUser({ userInfo: userInfo }));
         this.profileService.checkUserProfile().subscribe((response) => {
           const userProfile = Object.values(response).find(
-            (item) => item.owner === userInfo.email
+            (item: Profile) => item.owner === userInfo.email
           );
           this.checkUserProfile(userProfile, userInfo);
         });

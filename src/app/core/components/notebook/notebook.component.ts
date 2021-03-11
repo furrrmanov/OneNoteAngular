@@ -11,9 +11,9 @@ import { selectNotebook } from './../../../store/entity/selector/index';
   styleUrls: ['./notebook.component.scss'],
 })
 export class NotebookComponent implements OnInit {
-  public entity$: any = this.store$.pipe(select(selectNotebook));
+  public entity$ = this.store$.pipe(select(selectNotebook));
   public entityName: string = HOME_PAGE_PATH;
-  public subEntityName = 'note';
+  public subEntityName: string = 'note';
   constructor(private store$: Store) {}
 
   public ngOnInit(): void {

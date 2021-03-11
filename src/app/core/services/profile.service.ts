@@ -35,7 +35,7 @@ export class ProfileService {
       );
   }
 
-  public createUserProfile(email: string) {
+  public createUserProfile(email: string): Observable<any> {
     return this.http.post(`${BASE_API_URL}${CREATE_PROFILE_URL}`, {
       root: `${PROFILE_LIST_URL}`,
       value: {

@@ -12,7 +12,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class FacadeService {
-  private _userEmail$: Observable<any> = this.store.pipe(
+  private _userEmail$: Observable<string> = this.store.pipe(
     select(selectUserEmail)
   );
   public _userName$: Observable<string> = this.store.pipe(
@@ -29,19 +29,19 @@ export class FacadeService {
 
   constructor(private store: Store) {}
 
-  public selectUserAuth(): Observable<any> {
+  public selectUserAuth(): Observable<boolean> {
     return this._userIsAuth$;
   }
 
-  public selectUserEmail(): Observable<any> {
+  public selectUserEmail(): Observable<string> {
     return this._userEmail$;
   }
 
-  public selectUserName(): Observable<any> {
+  public selectUserName(): Observable<string> {
     return this._userName$;
   }
 
-  public selectUserPhoto(): Observable<any> {
+  public selectUserPhoto(): Observable<string> {
     return this._userPhoto$;
   }
 }

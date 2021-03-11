@@ -4,6 +4,123 @@
       <mat-label>Enter a article name:</mat-label>
       <input matInput autocomplete="off" formControlName="articleName" />
     </mat-form-field>
-    <div class="swipper-container"></div>
+
+    <div class="swipper-container">
+      <carousel
+        class="carousel"
+        cellsToShow="5"
+        loop="true"
+        cellsToScroll="1"
+        overflowCellsLimit="3"
+      >
+        <ng-container *ngFor="let img of imgList; index as i">
+          <div class="carousel-cell">
+            <mat-icon class="delete-image-icon" (click)="handleDeleteImage(i, img.imgName)"
+              >clear</mat-icon
+            >
+            <img src="{{ img.imgUrl }}" alt="img" />
+          </div>
+        </ng-container>
+      </carousel>
+
+      <div class="upload-container">
+        <mat-form-field class="uploaod-filed">
+          <div>
+            <mat-toolbar>
+              <input matInput readonly name="name" [value]="fileName" />
+              <button mat-flat-button color="primary">Upload image</button>
+            </mat-toolbar>
+
+            <input
+              type="file"
+              #fileInput
+              id="uploadFile"
+              (change)="uploadFile($event)"
+              name="uploadFile"
+              multiple="multiple"
+              accept="image/*"
+            />
+          </div>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="description-container">
+      <p class="title">Description</p>
+      <textarea
+        placeholder="Description"
+        class="textarea"
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5"
+        formControlName="articleDescription"
+      ></textarea>
+    </div>
+
+    <div class="characteristic-container">
+      <p class="title">Characterictic</p>
+      <div class="container">
+        <form
+          [formGroup]="form"
+          (ngSubmit)="onSubmit()"
+          class="characteristic-form"
+        >
+          <table class="table table-bordered" formArrayName="characteristic">
+            <tr
+              *ngFor="let quantity of characteristic().controls; let i = index"
+              [formGroupName]="i"
+            >
+              <td>
+                <input
+                  placeholder="Characteristic"
+                  type="text"
+                  formControlName="characteristic"
+                  class="form-control primary"
+                />
+              </td>
+              <td>
+                <input
+                  placeholder="Value"
+                  type="text"
+                  formControlName="value"
+                  class="form-control secondary"
+                />
+              </td>
+              <td>
+                <button
+                  mat-fab
+                  color="warn"
+                  class="delete-button"
+                  aria-label="Example icon button with a delete icon"
+                  (click)="removeCharacteristic(i)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </tr>
+          </table>
+          <div class="button-container">
+            <button
+              type="button"
+              (click)="addCharacteristic()"
+              mat-fab
+              color="none"
+              class="add-button"
+            >
+              <mat-icon style="font-size: 2rem" color="primary"
+                >add_circle</mat-icon
+              >
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              class="btn-save"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </form>
 </div>

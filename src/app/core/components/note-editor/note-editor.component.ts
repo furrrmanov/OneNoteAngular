@@ -21,8 +21,8 @@ import { UpdateSubEntityAction } from 'src/app/store/entity/actions';
 export class NoteEditorComponent implements OnInit, OnDestroy {
   public editorText: string;
   public activeNoteId: string;
-  public noteList: any;
-  public currentNote: any = {};
+  public noteList: NoteList[];
+  public currentNote: NoteList;
   public activeNotebookId: string;
   public form: FormGroup;
   public isChanged: boolean = true;
@@ -34,7 +34,7 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.route.params.pipe(takeUntil(this.isKilled)).subscribe((params) => {
       this.activeNotebookId = this.router.url.split('/')[2];
       this.activeNoteId = params.id;
@@ -43,7 +43,7 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
         .subscribe((data) => {
           this.noteList = data?.noteList;
           this.currentNote = data?.noteList.find(
-            (item) => item.id === this.activeNoteId
+            (item: NoteList) => item.id === this.activeNoteId
           );
           this.editorText = this.currentNote?.text;
           this.initFormGroup();
@@ -51,7 +51,7 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
     });
   }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.isKilled.next(true);
     this.isKilled.complete();
   }
@@ -66,11 +66,11 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
     });
   }
 
-  public changeEditor(event: string) {
+  public changeEditor(event: string): void {
     this.isChanged = event.trim() === this.currentNote?.text;
   }
 
-  public handleSave() {
+  public handleSave(): void {
     const chanchedNote = {
       ...this.currentNote,
       name: this.form.value.noteName,
@@ -98,10 +98,10 @@ export class NoteEditorComponent implements OnInit, OnDestroy {
   }
 
   public updatedItemFromNoteList(
-    data: Notebook[],
-    changedItem: any
-  ): Notebook[] {
-    const parseData = data.map((item) => item);
+    data: NoteList[],
+    changedItem: NoteList
+  ): NoteList[] {
+    const parseData = [...data];
     const index = data
       .map((item) => item)
       .findIndex((note) => note.id === changedItem.id);

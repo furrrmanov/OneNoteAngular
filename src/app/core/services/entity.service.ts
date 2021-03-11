@@ -1,3 +1,6 @@
+import { CreateEntity, DeleteEntity } from './../../shared/models/entity.model';
+import { Catalog } from './../../shared/models/catalog.model';
+import { Notebook } from './../../shared/models/notebook.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -12,7 +15,7 @@ import { BASE_API_URL } from '../constants';
 export class EntityService {
   constructor(private http: HttpClient, private store$: Store) {}
 
-  public getEntityList(value: { root: string }) {
+  public getEntityList(value: { root: string }): Observable<Notebook[] | Catalog[]> {
     const owner = JSON.parse(localStorage.getItem('user')).email;
     return this.http.post(`${BASE_API_URL}${value.root}`, value).pipe(
       map((data) => {
@@ -25,26 +28,26 @@ export class EntityService {
     );
   }
 
-  public createEntity({ value }) {
-    const path = `/${value.entity}/create-${value.entity}`;
+  public createEntity(options: CreateEntity): Observable<any> {
+    const path = `/${options.value.entity}/create-${options.value.entity}`;
     const data = {
       value: {
-        name: value.name,
-        owner: value.owner,
-        entity: value.entity,
+        name: options.value.name,
+        owner: options.value.owner,
+        entity: options.value.entity,
       },
-      root: `/${value.entity}`,
+      root: `/${options.value.entity}`,
     };
 
     return this.http.post(`${BASE_API_URL}${path}`, data);
   }
 
-  public deleteEntity(value: any) {
-    const path = `/${value.entity}/delete-${value.entity}`;
+  public deleteEntity(options: DeleteEntity): Observable<any> {
+    const path = `/${options.entity}/delete-${options.entity}`;
     const data = {
-      collectionName: `/${value.entity}`,
-      collectionRoot: `/${value.entity}/`,
-      id: value.id,
+      collectionName: `/${options.entity}`,
+      collectionRoot: `/${options.entity}/`,
+      id: options.id,
     };
 
     return this.http.request('delete', `${BASE_API_URL}${path}`, {

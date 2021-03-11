@@ -1,3 +1,6 @@
+import { CreateSubEntity } from './../../../shared/models/sub-entity.model';
+import { ArticleList } from './../../../shared/models/catalog.model';
+import { NoteList } from './../../../shared/models/notebook.model';
 import {
   CreateSubEntityAction,
   DeleteSubEntityAction,
@@ -19,9 +22,9 @@ export class SubEntityComponent implements OnInit {
   @Input() public entityName: string;
   @Input() public subEntityName: string;
   public activeEntityId: string;
-  public subEntityList: any;
+  public subEntityList: NoteList[] | ArticleList[];
   public contextMenu: MatMenuTrigger;
-  public currentContextItem: any;
+  public currentContextItem: NoteList | ArticleList;
   public contextMenuIsOpen: boolean = false;
   public contextMenuPosition = { x: '0px', y: '0px' };
   public handleDeleteItem: () => void;
@@ -42,7 +45,9 @@ export class SubEntityComponent implements OnInit {
             )
           )
         )
-        .subscribe((data) => (this.subEntityList = data));
+        .subscribe((data) => {
+          this.subEntityList = data;
+        });
     });
     this.handleDeleteItem = this.deleteItem.bind(this);
   }
@@ -58,7 +63,7 @@ export class SubEntityComponent implements OnInit {
     ];
   }
 
-  public onContextMenu(event: MouseEvent, item: any) {
+  public onContextMenu(event: MouseEvent, item: NoteList | ArticleList): void {
     event.preventDefault();
     this.contextMenuIsOpen = true;
     this.currentContextItem = item;
@@ -78,33 +83,31 @@ export class SubEntityComponent implements OnInit {
   }
 
   public handleAddSubEntity(): void {
-    this.store$.dispatch(
-      CreateSubEntityAction({
-        data: {
-          value: {
-            entity: this.entityName,
-            id: this.activeEntityId,
-            collectionName: this.subEntityName,
-            subEntityList: this.subEntityList,
-          },
+    const newSubEntity = {
+      data: {
+        value: {
+          entity: this.entityName,
+          id: this.activeEntityId,
+          collectionName: this.subEntityName,
+          subEntityList: this.subEntityList,
         },
-      })
-    );
+      },
+    };
+    this.store$.dispatch(CreateSubEntityAction(newSubEntity));
   }
 
-  public deleteItem(item): void {
-    this.store$.dispatch(
-      DeleteSubEntityAction({
-        data: {
-          value: {
-            item,
-            entity: this.entityName,
-            id: this.activeEntityId,
-            collectionName: this.subEntityName,
-            subEntityList: this.subEntityList,
-          },
+  public deleteItem(item: NoteList | ArticleList): void {
+    const deleteSubEntity = {
+      data: {
+        value: {
+          item,
+          entity: this.entityName,
+          id: this.activeEntityId,
+          collectionName: this.subEntityName,
+          subEntityList: this.subEntityList,
         },
-      })
-    );
+      },
+    };
+    this.store$.dispatch(DeleteSubEntityAction(deleteSubEntity));
   }
 }
